@@ -10,7 +10,7 @@ second+ is gated behind a paywall stub (no payment wired up yet).
 - Visual deck: tap to shuffle, pick 3 cards from a fanned spread
 - AI reading via Claude API, grounded in actual card meanings + orientation
 - Voice avatar: a short spoken intro/outro in Dr. Sneha Jain's cloned voice
-  (ElevenLabs), played around the written reading
+  (Fish Audio), played around the written reading
 - Return-user memory: if someone has read before, their last few readings are
   folded into the prompt so the AI can reference their pattern
 - Free-reading gate: after reading #1, a "Continue to payment" screen appears
@@ -44,8 +44,8 @@ vercel dev
 | Variable | Where to get it |
 |---|---|
 | `ANTHROPIC_API_KEY` | console.anthropic.com → API Keys |
-| `ELEVENLABS_API_KEY` | elevenlabs.io → Profile → API Keys |
-| `ELEVENLABS_VOICE_ID` | elevenlabs.io → Voices → Instant Voice Cloning. Upload a clean ~1-2 min sample of Dr. Sneha Jain's voice (no background noise) to create the clone, then copy the Voice ID it generates. |
+| `FISH_AUDIO_API_KEY` | fish.audio → account settings → API Keys |
+| `FISH_AUDIO_REFERENCE_ID` | fish.audio/voice-clone. Upload a clean ~15-30 sec sample of Dr. Sneha Jain's voice (no background noise) to create the clone, then copy the reference/model ID it generates. |
 
 Set all three in Vercel: dashboard → your project → Settings → Environment
 Variables, then redeploy.
@@ -73,7 +73,7 @@ by phone number or Instagram handle.
 ```
 api/reading.js          - serverless function, calls Claude API for the
                            written reading + spoken intro/outro
-api/voice.js              - serverless function, calls ElevenLabs TTS with
+api/voice.js              - serverless function, calls Fish Audio TTS with
                              Dr. Sneha Jain's cloned voice
 src/data/deck.js         - full 78-card tarot deck + draw logic
 src/data/store.js        - localStorage-backed history/gate state
@@ -96,7 +96,7 @@ src/index.css            - design tokens + all component styles, including
   loop back to a free question — that's intentional for testing, but
   needs to be gated for real once payment exists.
 - Identity: localStorage only. Move to phone/IG-handle-based accounts.
-- Voice cost: ElevenLabs charges per character generated. Every free
+- Voice cost: Fish Audio is pay-as-you-go per character generated. Every free
   reading currently generates a voice intro/outro at no extra gate —
   worth deciding if voice should be a paid-tier perk before this scales
   to many free users.
