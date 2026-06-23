@@ -40,9 +40,10 @@ export default function App() {
   function handleRestart() {
     setQuestion("");
     setCards([]);
-    // Free reading is already used by the time this is reachable —
-    // restarting always lands back on the gate, not a fresh free reading.
-    setStage("gate");
+    // Paywall isn't enforced yet (Phase 3 is a visual stub), so restart
+    // genuinely sends the user back to ask a new question. Once payment
+    // is wired up, this should check payment status before allowing this.
+    setStage("question");
   }
 
   return (
