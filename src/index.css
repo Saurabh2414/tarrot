@@ -1,0 +1,424 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&family=Inter:wght@400;500;600&display=swap');
+
+:root {
+  --ink: #1B1530;
+  --ink-deep: #120D22;
+  --bone: #EDE6D6;
+  --bone-dim: #C9C1AE;
+  --gold: #B68A4E;
+  --gold-bright: #D4AC72;
+  --rose: #8C5B6E;
+  --line: rgba(237, 230, 214, 0.14);
+
+  --font-display: 'Cormorant Garamond', serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  background: radial-gradient(ellipse at 50% -10%, #261E40 0%, var(--ink) 45%, var(--ink-deep) 100%);
+  color: var(--bone);
+  font-family: var(--font-body);
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+}
+
+button {
+  font-family: var(--font-body);
+  cursor: pointer;
+}
+
+button:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--gold-bright);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+.app-shell {
+  max-width: 480px;
+  margin: 0 auto;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 0 20px 48px;
+  position: relative;
+}
+
+/* ---------- Brand mark ---------- */
+.brand-mark {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 28px 0 8px;
+}
+.brand-glyph {
+  color: var(--gold);
+  font-size: 18px;
+}
+.brand-name {
+  font-family: var(--font-display);
+  font-size: 17px;
+  letter-spacing: 0.06em;
+  color: var(--bone-dim);
+  text-transform: uppercase;
+}
+
+/* ---------- Shared step layout ---------- */
+.step {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding-top: 16px;
+  animation: stepIn 0.5s ease both;
+}
+@keyframes stepIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.eyebrow {
+  font-family: var(--font-body);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin: 0 0 10px;
+}
+
+.display-title {
+  font-family: var(--font-display);
+  font-size: 34px;
+  line-height: 1.15;
+  font-weight: 500;
+  margin: 0 0 12px;
+  color: var(--bone);
+}
+.display-title em {
+  font-style: italic;
+  color: var(--gold-bright);
+}
+
+.subtext {
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--bone-dim);
+  margin: 0 0 28px;
+  max-width: 38ch;
+}
+
+.primary-btn {
+  background: var(--gold);
+  color: var(--ink-deep);
+  border: none;
+  border-radius: 999px;
+  padding: 15px 28px;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  transition: transform 0.15s ease, background 0.2s ease, opacity 0.2s ease;
+}
+.primary-btn:hover:not(:disabled) {
+  background: var(--gold-bright);
+  transform: translateY(-1px);
+}
+.primary-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.ghost-btn {
+  background: transparent;
+  color: var(--bone-dim);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 13px 24px;
+  font-size: 14px;
+  margin-top: 16px;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+.ghost-btn:hover {
+  border-color: var(--gold);
+  color: var(--bone);
+}
+
+/* ---------- Question step ---------- */
+.question-input {
+  width: 100%;
+  background: rgba(237, 230, 214, 0.05);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 16px;
+  color: var(--bone);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.5;
+  resize: none;
+  margin-bottom: 16px;
+}
+.question-input:focus {
+  outline: none;
+  border-color: var(--gold);
+}
+.question-input::placeholder {
+  color: var(--bone-dim);
+  opacity: 0.6;
+}
+
+.prompt-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 36px;
+}
+.chip {
+  background: transparent;
+  border: 1px solid var(--line);
+  color: var(--bone-dim);
+  border-radius: 999px;
+  padding: 8px 14px;
+  font-size: 13px;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+.chip:hover {
+  border-color: var(--rose);
+  color: var(--bone);
+}
+
+/* ---------- Deck step ---------- */
+.deck-stack {
+  position: relative;
+  height: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 24px;
+}
+.deck-card-back {
+  position: absolute;
+  width: 110px;
+  height: 168px;
+  border-radius: 12px;
+  background: linear-gradient(160deg, #2A2147 0%, var(--ink) 70%);
+  border: 1px solid rgba(182, 138, 78, 0.35);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  transform: translate(calc(var(--i) * 3px), calc(var(--i) * -3px)) rotate(calc(var(--i) * 2deg - 4deg));
+}
+.deck-card-back.shuffle-anim {
+  animation: shuffleMove 0.9s ease-in-out;
+}
+@keyframes shuffleMove {
+  0% { transform: translate(calc(var(--i) * 3px), calc(var(--i) * -3px)) rotate(calc(var(--i) * 2deg - 4deg)); }
+  50% { transform: translate(calc(var(--i) * -10px), calc(var(--i) * 6px)) rotate(calc(var(--i) * -6deg + 8deg)); }
+  100% { transform: translate(calc(var(--i) * 3px), calc(var(--i) * -3px)) rotate(calc(var(--i) * 2deg - 4deg)); }
+}
+.shuffle-btn {
+  position: absolute;
+  bottom: -8px;
+}
+
+.fan-wrap {
+  margin-top: 12px;
+}
+.fan {
+  position: relative;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+.fan-card {
+  position: absolute;
+  width: 54px;
+  height: 88px;
+  border-radius: 8px;
+  background: linear-gradient(160deg, #2A2147 0%, var(--ink) 70%);
+  border: 1px solid rgba(182, 138, 78, 0.35);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.35);
+  transform-origin: bottom center;
+  transform: rotate(var(--angle)) translateX(0);
+  left: calc(50% - 27px);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, opacity 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold);
+  font-size: 14px;
+}
+.fan-card:hover:not(:disabled) {
+  transform: rotate(var(--angle)) translateY(-14px);
+  box-shadow: 0 10px 22px rgba(0,0,0,0.45);
+}
+.fan-card.is-picked {
+  opacity: 0;
+  transform: rotate(var(--angle)) translateY(-60px) scale(0.7);
+}
+.fan-card:disabled {
+  cursor: default;
+}
+
+.pick-dots {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 16px;
+}
+.dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  border: 1px solid var(--gold);
+  background: transparent;
+  transition: background 0.2s ease;
+}
+.dot.filled {
+  background: var(--gold);
+}
+
+/* ---------- Reading step ---------- */
+.drawn-row {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+.drawn-card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+.drawn-card-face {
+  width: 100%;
+  aspect-ratio: 2 / 3;
+  border-radius: 12px;
+  background: linear-gradient(160deg, #2E2452 0%, var(--ink) 75%);
+  border: 1px solid rgba(182, 138, 78, 0.4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px;
+  text-align: center;
+  animation: cardFlip 0.6s ease both;
+}
+.drawn-card-face.reversed {
+  transform: rotate(180deg);
+}
+@keyframes cardFlip {
+  from { transform: rotateY(90deg) scale(0.9); opacity: 0; }
+  to { transform: rotateY(0deg) scale(1); opacity: 1; }
+}
+.drawn-card-glyph {
+  color: var(--gold);
+  font-size: 18px;
+}
+.drawn-card-name {
+  font-family: var(--font-display);
+  font-size: 13px;
+  line-height: 1.25;
+  color: var(--bone);
+}
+.drawn-card-tag {
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--rose);
+}
+.drawn-card-label {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--bone-dim);
+}
+
+.reading-card {
+  background: rgba(237, 230, 214, 0.04);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 22px;
+  margin-bottom: 24px;
+  min-height: 120px;
+}
+.reading-question {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 16px;
+  color: var(--gold-bright);
+  margin: 0 0 14px;
+}
+.reading-text {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--bone);
+  margin: 0;
+  white-space: pre-wrap;
+}
+.reading-loading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--bone-dim);
+  font-size: 14px;
+}
+.spinner {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid var(--line);
+  border-top-color: var(--gold);
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+.reading-error p {
+  color: var(--bone-dim);
+  font-size: 14px;
+  margin: 0 0 12px;
+}
+
+/* ---------- Gate step ---------- */
+.gate-card {
+  background: rgba(182, 138, 78, 0.08);
+  border: 1px solid rgba(182, 138, 78, 0.3);
+  border-radius: 18px;
+  padding: 22px;
+  margin-bottom: 8px;
+}
+.gate-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 18px;
+  font-size: 15px;
+}
+.gate-row strong {
+  font-family: var(--font-display);
+  font-size: 22px;
+  color: var(--gold-bright);
+}
+.gate-card .primary-btn {
+  width: 100%;
+}
+.gate-note {
+  font-size: 12px;
+  color: var(--bone-dim);
+  text-align: center;
+  margin: 12px 0 0;
+}
